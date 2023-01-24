@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var notes = <Notes>[];
   var subNotes = <SubNotes>[];
-  var isarSubNoteSubscription = <StreamSubscription>[];
+  var isarSubNoteSubscriptions = <StreamSubscription>[];
 
   @override
   void initState() {
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final isarSubNotesInstance = isarInstance.subNotes;
 
     notes.forEach((element) {
-      isarSubNoteSubscription.add(
+      isarSubNoteSubscriptions.add(
         isarSubNotesInstance
             .filter()
             .parentNoteIdEqualTo(element.uuid, caseSensitive: false)
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () async {
                           print('cancel');
                           await Future.wait(
-                              isarSubNoteSubscription.map((e) => e.cancel()));
+                              isarSubNoteSubscriptions.map((e) => e.cancel()));
                           print('cancelled');
                         },
                         child: const Text('Cancel'),
